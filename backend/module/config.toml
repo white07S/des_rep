@@ -1,0 +1,68 @@
+[providers]
+# Default provider to use: "openai" or "azure"
+default_provider = "openai"
+
+# -----------------------
+# OpenAI (public OpenAI)
+# -----------------------
+[providers.openai]
+api_base = "${env:OPENAI_API_BASE|https://api.openai.com/v1}"
+api_key  = "${env:OPENAI_API_KEY}" # REQUIRED
+
+[providers.openai.llm]
+# Which profile your app should use by default (fast|reasoning|long_context|...)
+default_profile = "${env:OPENAI_LLM_PROFILE|fast}"
+
+[providers.openai.llm.models.fast]
+model = "${env:OPENAI_LLM_MODEL_FAST}"
+
+[providers.openai.llm.models.reasoning]
+model = "${env:OPENAI_LLM_MODEL_REASONING}"
+
+[providers.openai.llm.models.long_context]
+model = "${env:OPENAI_LLM_MODEL_LONG_CONTEXT}"
+
+[providers.openai.embeddings]
+model = "${env:OPENAI_EMBEDDINGS_MODEL}"
+
+# -----------------------
+# Azure OpenAI
+# -----------------------
+[providers.azure]
+api_base = "${env:AZURE_OPENAI_ENDPOINT}" # REQUIRED (e.g. https://<res>.openai.azure.com)
+
+[providers.azure.llm]
+# NOTE: LLM api_version can differ from embeddings api_version
+api_version      = "${env:AZURE_OPENAI_LLM_API_VERSION}" # REQUIRED
+api_key          = "${env:AZURE_OPENAI_LLM_API_KEY}"     # REQUIRED
+default_profile  = "${env:AZURE_OPENAI_LLM_PROFILE|fast}"
+
+[providers.azure.llm.models.fast]
+deployment = "${env:AZURE_OPENAI_LLM_DEPLOYMENT_FAST}"
+
+[providers.azure.llm.models.reasoning]
+deployment = "${env:AZURE_OPENAI_LLM_DEPLOYMENT_REASONING}"
+
+[providers.azure.llm.models.long_context]
+deployment = "${env:AZURE_OPENAI_LLM_DEPLOYMENT_LONG_CONTEXT}"
+
+[providers.azure.embeddings]
+api_version = "${env:AZURE_OPENAI_EMBEDDINGS_API_VERSION}" # REQUIRED
+api_key     = "${env:AZURE_OPENAI_EMBEDDINGS_API_KEY}"     # REQUIRED
+deployment  = "${env:AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT}"  # REQUIRED
+
+# -----------------------
+# Azure Document Intelligence
+# -----------------------
+[azure_document_intelligence]
+endpoint = "${env:AZURE_DOC_INTELLIGENCE_ENDPOINT}" # REQUIRED
+api_key  = "${env:AZURE_DOC_INTELLIGENCE_API_KEY}"  # REQUIRED
+
+[testing_files]
+testing_directory = "${env:TESTING_FILES_DIRECTORY}"
+
+[logging]
+logging_directory = "${env:LOGGING_DIRECTORY}"
+
+[storage]
+data_root = "${env:DATA_ROOT|/Users/preetam/Develop/rag_business/file_handlers_output}"

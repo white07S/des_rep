@@ -1,0 +1,28 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.13.2",
+    "azure-ai-documentintelligence>=1.0.2",
+    "celery>=5.3.6",
+    "duckdb>=1.4.3",
+    "fastmcp>=2.14.1",
+    "openai>=2.14.0",
+    "openai-agents>=0.6.4",
+    "pandas>=2.3.3",
+    "pyarrow>=22.0.0",
+    "pymupdf>=1.24.11",
+    "python-dotenv>=1.2.1",
+    "qdrant-client>=1.16.2",
+    "saq>=0.26.0",
+    "sqlalchemy>=2.0.45",
+    "tqdm>=4.67.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]

@@ -1,0 +1,20 @@
+# Environment and virtualenv
+.env
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Output / runtime artifacts
+file_handlers_output/
+test_files/
+logs/
+agents_snapshots/
+
+# Node modules (local codex)
+backend/nodemod/
+node_modules/
+
+# Agent-specific env/config copies
+backend/module/agents/*/.env

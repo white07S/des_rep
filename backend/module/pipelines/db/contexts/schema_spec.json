@@ -1,0 +1,81 @@
+{
+  "spec_version": "1.0",
+  "description": "Generic specification for documenting relational database schemas with structural, technical, and business context.",
+  "required_top_level_fields": [
+    "last_updated",
+    "database_type",
+    "tables"
+  ],
+  "field_definitions": {
+    "last_updated": {
+      "type": "string",
+      "format": "ISO 8601 UTC timestamp",
+      "example": "2024-06-01T12:00:00Z",
+      "purpose": "Signals when the schema metadata was most recently refreshed."
+    },
+    "database_type": {
+      "type": "string",
+      "examples": [
+        "SQLite",
+        "PostgreSQL",
+        "MySQL",
+        "Snowflake"
+      ],
+      "purpose": "Names the underlying database technology to anchor data type expectations."
+    },
+    "tables": {
+      "type": "array",
+      "items": "table_template",
+      "purpose": "Collection of table definitions, each including keys, columns, relationships, and business context."
+    }
+  },
+  "table_template": {
+    "table_name": "<string: required>",
+    "table_name_comment": "<string: concise technical description of what the table stores>",
+    "table_name_business_interpretations": "<string: how this table is used for business analysis and decision-making>",
+    "primary_key": "<string or array of strings: required>",
+    "primary_key_comment": "<string: why this key uniquely identifies records>",
+    "primary_key_business_interpretations": "<string: how the key supports consistent linkage and analytics>",
+    "foreign_keys": [
+      "foreign_key_template"
+    ],
+    "columns": [
+      "column_template"
+    ]
+  },
+  "foreign_key_template": {
+    "from_table": "<string: required>",
+    "from_column": "<string: required>",
+    "to_table": "<string: required>",
+    "to_column": "<string: required>",
+    "relationship_type": "<string: many-to-one | one-to-many | one-to-one>",
+    "foreign_key_comment": "<string: technical rationale for the relationship>",
+    "foreign_key_business_interpretation": "<string: how this relationship enables analysis or reporting>"
+  },
+  "column_template": {
+    "column_name": "<string: required>",
+    "column_dtype": "<string: database-native type (e.g., TEXT, INTEGER, TIMESTAMP)>",
+    "column_comment": "<string: what the column stores and constraints if any>",
+    "column_business_interpretation": "<string: why this column matters for business questions and metrics>",
+    "importance_label": "<string: high | medium | low>"
+  },
+  "business_context_expectations": {
+    "columns": "Each column should include a business interpretation that explains how it is used in analytics or operations.",
+    "foreign_keys": "Each relationship should describe both technical linkage and business value unlocked by joins.",
+    "tables": "Every table should include a narrative on its analytical role to clarify how it fits into the domain."
+  },
+  "authoring_conventions": {
+    "tone": "Clear, concise, and domain-aware descriptions; avoid jargon where possible.",
+    "data_types": "Prefer database-native types; if using vendor-specific types, include clarifying notes in column_comment.",
+    "importance_labels": {
+      "allowed_values": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "guidance": "Use high for primary identifiers and critical metrics, medium for frequently joined or filtered fields, and low for auxiliary attributes."
+    },
+    "relationships": "Use consistent relationship_type values (many-to-one, one-to-many, one-to-one) and ensure from/to tables align with key constraints.",
+    "timestamps": "Represent dates and timestamps in ISO 8601 strings with explicit timezone (prefer UTC)."
+  }
+}
