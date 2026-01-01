@@ -1,0 +1,104 @@
+# Central configuration for agent assembly. Paths are resolved relative to this file unless absolute.
+
+[defaults]
+llm_profile = "fast"
+model_provider = "azure"
+preferred_auth_method = "apikey"
+model_reasoning_effort = "high"
+request_max_retries = 10
+stream_max_retries = 10
+sandbox_mode = "danger-full-access"
+ask_for_approval = "never"
+skip_git_repo_check = true
+instructions_dir = "instructions"
+project_root = "/Users/preetam/Develop/rag_business/backend/nodemod"
+local_codex_bin = "/Users/preetam/Develop/rag_business/backend/nodemod/node_modules/.bin/codex"
+working_dir = "."
+
+[defaults.env]
+PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+HOME = "/Users/preetam"
+USER = "preetam"
+
+[[agents]]
+name = "db_agent"
+agent_folder = "db_agent"
+instructions_file = "db_AGENTS.md"
+llm_profile = "fast"
+model_provider = "azure"
+preferred_auth_method = "apikey"
+model_reasoning_effort = "high"
+request_max_retries = 10
+stream_max_retries = 10
+
+[agents.mcp_servers.db]
+command = "/opt/homebrew/bin/uv"
+cwd = "/Users/preetam/Develop/rag_business"
+startup_timeout_sec = 20
+args = [
+  "--project",
+  "/Users/preetam/Develop/rag_business/backend",
+  "run",
+  "python",
+  "-m",
+  "backend.module.mcp_servers.db.server",
+]
+
+[[agents]]
+name = "viz_agent"
+agent_folder = "viz_agent"
+instructions_file = "viz_AGENTS.md"
+llm_profile = "fast"
+model_provider = "azure"
+preferred_auth_method = "apikey"
+model_reasoning_effort = "high"
+request_max_retries = 10
+stream_max_retries = 10
+
+[agents.mcp_servers.viz]
+command = "/opt/homebrew/bin/uv"
+cwd = "/Users/preetam/Develop/rag_business"
+startup_timeout_sec = 20
+args = [
+  "--project",
+  "/Users/preetam/Develop/rag_business/backend",
+  "run",
+  "python",
+  "-m",
+  "backend.module.mcp_servers.viz.server",
+]
+
+[[agents]]
+name = "doc_agent"
+agent_folder = "doc_agent"
+instructions_file = "doc_AGENTS.md"
+llm_profile = "fast"
+model_provider = "azure"
+preferred_auth_method = "apikey"
+model_reasoning_effort = "high"
+request_max_retries = 10
+stream_max_retries = 10
+
+[agents.mcp_servers.docs]
+command = "/opt/homebrew/bin/uv"
+cwd = "/Users/preetam/Develop/rag_business"
+startup_timeout_sec = 20
+args = [
+  "--project",
+  "/Users/preetam/Develop/rag_business/backend",
+  "run",
+  "python",
+  "-m",
+  "backend.module.mcp_servers.docs.server",
+]
+
+[[agents]]
+name = "response_agent"
+agent_folder = "response_agent"
+instructions_file = "response_AGENTS.md"
+llm_profile = "fast"
+model_provider = "azure"
+preferred_auth_method = "apikey"
+model_reasoning_effort = "high"
+request_max_retries = 10
+stream_max_retries = 10

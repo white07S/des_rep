@@ -23,10 +23,10 @@ logger = LoggingInterceptor("mcp_viz_tools")
 
 
 def ensure_index_available() -> Path:
-    index_path = Path(__file__).resolve().parents[4] / "backend" / "test_files" / "echarts_schema.index.json"
+    index_path = Path(__file__).resolve().parents[4] / "backend" / "module" / "viz_context" / "echarts_schema.index.json"
     if not index_path.exists():
         raise FileNotFoundError(
-            f"ECharts schema index not found at {index_path}. Copy schema.index.json into backend/test_files."
+            f"ECharts schema index not found at {index_path}. Copy schema.index.json into backend/module/viz_context."
         )
     return index_path
 
